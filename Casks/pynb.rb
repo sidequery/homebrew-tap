@@ -1,7 +1,7 @@
 cask "pynb" do
   version "0.1.0,1"
-  sha256 "973bd817f5d867d89c815edcc775f79aede77ad58bedbcab5bbeef3e3b16d6da"
-  asset_id = 344919173
+  sha256 "c281cc3df3c354f2bae5568c1c4f8b61f37c9a828f5cc3ae34043f0341a5fff8"
+  asset_id = 344920600
 
   token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
