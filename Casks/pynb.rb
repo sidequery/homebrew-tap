@@ -1,7 +1,7 @@
 cask "pynb" do
-  version "0.4.21,31"
-  sha256 "fe4dd29c57a8ae604d62d7192aa4a3b5fe6fd0986982ad107416545e026504cd"
-  asset_id = 352271888
+  version "0.4.22,32"
+  sha256 "bf5d51e22a04ad704b31b887441cec631955a59ed776246e8b4323d8bcfa11f2"
+  asset_id = 352702709
 
   token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
@@ -14,7 +14,7 @@ cask "pynb" do
           "X-GitHub-Api-Version: 2022-11-28",
         ]
   else
-    url "https://github.com/sidequery/homebrew-tap/releases/download/pynb-0.4.21-31/pynb-0.4.21-31-macos14.0-arm64.zip",
+    url "https://github.com/sidequery/homebrew-tap/releases/download/pynb-0.4.22-32/pynb-0.4.22-32-macos14.0-arm64.zip",
         verified: "github.com/sidequery/homebrew-tap/"
   end
 
