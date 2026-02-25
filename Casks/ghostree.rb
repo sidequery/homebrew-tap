@@ -1,7 +1,7 @@
 cask "ghostree" do
-  version "0.3.14"
-  sha256 "ac887fa7aae0b6fd153376bea4dfc84b6822863d97fd1d6fe383d935d234192f"
-  asset_id = 360223573
+  version "0.3.15"
+  sha256 "d76bd038b7d860bce8ae208c84d5ae04f476f5a3756d204adf7f0286d61e19b8"
+  asset_id = 362188528
 
   token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
