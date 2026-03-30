@@ -1,7 +1,7 @@
 cask "mdnb" do
-  version "0.6.11,40"
-  sha256 "9865be4f660e8299b0c218f2e2487da98a168c7cd93ff9d892827c0359a12dca"
-  asset_id = 375035783
+  version "0.7.0,41"
+  sha256 "a03e3a648dd64632f2c5960a3236b58e6febe1853fccef33010e3cdc7ae25803"
+  asset_id = 384830717
 
   token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
@@ -14,7 +14,7 @@ cask "mdnb" do
           "X-GitHub-Api-Version: 2022-11-28",
         ]
   else
-    url "https://github.com/sidequery/homebrew-tap/releases/download/mdnb-0.6.11-40/mdnb-0.6.11-40-macos14.0-arm64.zip",
+    url "https://github.com/sidequery/homebrew-tap/releases/download/mdnb-0.7.0-41/mdnb-0.7.0-41-macos14.0-arm64.zip",
         verified: "github.com/sidequery/homebrew-tap/"
   end
 
