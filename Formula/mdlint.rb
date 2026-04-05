@@ -1,26 +1,26 @@
 class Mdlint < Formula
   desc "Fast markdown linter with backlink validation"
   homepage "https://github.com/sidequery/mdlint"
-  version "0.1.1"
+  version "0.1.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/sidequery/mdlint/releases/download/v#{version}/mdlint-#{version}-macos-arm64.tar.gz"
-      sha256 "2ecdc36b09b768234b68d66230cb7866145543875dcd2090730c040c3d8579a3"
+      sha256 "38c6c841ddde6173220dfbbe4c761435681dba984831f5e5e02a0fd1f4140c78"
     else
       url "https://github.com/sidequery/mdlint/releases/download/v#{version}/mdlint-#{version}-macos-x86_64.tar.gz"
-      sha256 "f608af886ee0cc3b0327cdfdc9de88cff1449c747035b90f112ba866210b88ad"
+      sha256 "3dd23c107309ec81b9d369a0cd50547fa7e942f17ba87a74f73b1d1df44f4614"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/sidequery/mdlint/releases/download/v#{version}/mdlint-#{version}-linux-arm64.tar.gz"
-      sha256 "ade1f02b4a0715224a32db13ef82338aa2d2ebd3210b7bdc3d9a2ef89edfe1e5"
+      sha256 "dc1ada28ad82bf06c6238491e7324a2fdc857f2dbc4ef069aa032b11173b8d9b"
     else
       url "https://github.com/sidequery/mdlint/releases/download/v#{version}/mdlint-#{version}-linux-x86_64.tar.gz"
-      sha256 "3924705cc84ebdcdb0c267ee972d9c590edda43c36903c29337eed14170056e9"
+      sha256 "54289323a79aee0e28cad6f81040b8e5b5b40d15a0e27efd2812d02f356d80d7"
     end
   end
 
