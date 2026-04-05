@@ -1,0 +1,70 @@
+name: Update formula
+
+on:
+  repository_dispatch:
+    types: [update-formula]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+      - name: Update formula
+        env:
+          FORMULA: ${{ github.event.client_payload.formula }}
+          VERSION: ${{ github.event.client_payload.version }}
+          REPO: ${{ github.event.client_payload.repo }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${VERSION#v}"
+
+          echo "Updating ${FORMULA} to ${VERSION}"
+
+          BASE_URL="https://github.com/${REPO}/releases/download/v${VERSION}"
+
+          MACOS_ARM64_SHA=$(curl -sL "${BASE_URL}/${FORMULA}-${VERSION}-macos-arm64.tar.gz.sha256" | awk '{print $1}')
+          MACOS_X86_SHA=$(curl -sL "${BASE_URL}/${FORMULA}-${VERSION}-macos-x86_64.tar.gz.sha256" | awk '{print $1}')
+          LINUX_ARM64_SHA=$(curl -sL "${BASE_URL}/${FORMULA}-${VERSION}-linux-arm64.tar.gz.sha256" | awk '{print $1}')
+          LINUX_X86_SHA=$(curl -sL "${BASE_URL}/${FORMULA}-${VERSION}-linux-x86_64.tar.gz.sha256" | awk '{print $1}')
+
+          echo "SHA256 sums:"
+          echo "  macos-arm64: ${MACOS_ARM64_SHA}"
+          echo "  macos-x86_64: ${MACOS_X86_SHA}"
+          echo "  linux-arm64: ${LINUX_ARM64_SHA}"
+          echo "  linux-x86_64: ${LINUX_X86_SHA}"
+
+          FORMULA_FILE="Formula/${FORMULA}.rb"
+
+          sed -i "s/version \".*\"/version \"${VERSION}\"/" "${FORMULA_FILE}"
+
+          awk -v ma="${MACOS_ARM64_SHA}" -v mx="${MACOS_X86_SHA}" -v la="${LINUX_ARM64_SHA}" -v lx="${LINUX_X86_SHA}" '
+            BEGIN { macos_count=0; linux_count=0 }
+            /on_macos do/,/end/ {
+              if (/sha256/) {
+                macos_count++
+                if (macos_count == 1) { sub(/sha256 ".*"/, "sha256 \"" ma "\"") }
+                if (macos_count == 2) { sub(/sha256 ".*"/, "sha256 \"" mx "\"") }
+              }
+            }
+            /on_linux do/,/end/ {
+              if (/sha256/) {
+                linux_count++
+                if (linux_count == 1) { sub(/sha256 ".*"/, "sha256 \"" la "\"") }
+                if (linux_count == 2) { sub(/sha256 ".*"/, "sha256 \"" lx "\"") }
+              }
+            }
+            { print }
+          ' "${FORMULA_FILE}" > "${FORMULA_FILE}.tmp" && mv "${FORMULA_FILE}.tmp" "${FORMULA_FILE}"
+
+          cat "${FORMULA_FILE}"
+
+      - name: Commit and push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git diff --staged --quiet || (git commit -m "Update ${{ github.event.client_payload.formula }} to ${{ github.event.client_payload.version }}" && git push)
