@@ -1,7 +1,7 @@
 cask "mdnb" do
-  version "0.8.0,42"
-  sha256 "e83b0ee7fd6a453b7a3d00ea904dd2bfd34f45bf9e29c1601ce4e7928d4c969e"
-  asset_id = 399544037
+  version "0.8.1,43"
+  sha256 "884820c2560b8b605ed98ac0212cf2c2e60416a809fa53edc61b66bd04263189"
+  asset_id = 399571231
 
   token = ENV["HOMEBREW_GITHUB_API_TOKEN"] || ENV["GITHUB_TOKEN"]
 
@@ -14,7 +14,7 @@ cask "mdnb" do
           "X-GitHub-Api-Version: 2022-11-28",
         ]
   else
-    url "https://github.com/sidequery/homebrew-tap/releases/download/mdnb-0.8.0-42/mdnb-0.8.0-42-macos14.0-arm64.zip",
+    url "https://github.com/sidequery/homebrew-tap/releases/download/mdnb-0.8.1-43/mdnb-0.8.1-43-macos15.0-arm64.zip",
         verified: "github.com/sidequery/homebrew-tap/"
   end
 
@@ -22,7 +22,7 @@ cask "mdnb" do
   desc "Local-first Markdown notebook"
   homepage "https://github.com/sidequery/mdnb"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: ">= :sequoia"
   depends_on arch: :arm64
 
   app "mdnb.app"
