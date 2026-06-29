@@ -22,7 +22,7 @@ cask "mdnb" do
   desc "Local-first Markdown notebook"
   homepage "https://github.com/sidequery/mdnb"
 
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
   depends_on arch: :arm64
 
   app "mdnb.app"
